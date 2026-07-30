@@ -7,87 +7,180 @@
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sekiury Sports · Solicitud de Póliza</title>
-<link href="./Sekiury Sports · Solicitud de Póliza_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
   :root {
     --pink: #DC479E;
     --blue: #2F4D8A;
+    --blue-light: #3a5fa8;
     --cyan: #90FFD9;
-    --bg: #f0f4ff;
+    --bg: #eef2fb;
+    --bg2: #f7f9ff;
     --card: #ffffff;
-    --text: #1a2744;
-    --muted: #6b7eb8;
-    --border: #dde5f5;
+    --text: #111d3a;
+    --muted: #7085b6;
+    --border: #e0e8f7;
+    --shadow-sm: 0 1px 4px rgba(47,77,138,0.06), 0 4px 20px rgba(47,77,138,0.08);
+    --shadow-md: 0 2px 8px rgba(47,77,138,0.06), 0 8px 32px rgba(47,77,138,0.12);
+    --radius: 18px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
   .hero {
-    background: linear-gradient(160deg, var(--blue) 0%, #1a2f6e 60%, #0d1f4d 100%);
-    padding: 36px 24px 50px; text-align: center; position: relative; overflow: hidden;
+    background: linear-gradient(155deg, #1e3a7a 0%, #0f2057 55%, #09163d 100%);
+    padding: 44px 24px 62px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 50%, rgba(144,255,217,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 30%, rgba(220,71,158,0.06) 0%, transparent 70%);
+    pointer-events: none;
   }
   .hero::after {
-    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
-    height: 40px; background: var(--bg); clip-path: ellipse(55% 100% at 50% 100%);
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 48px; background: var(--bg);
+    clip-path: ellipse(58% 100% at 50% 100%);
   }
-  .hero-logo { margin-bottom: 16px; }
-  .hero-logo img { height: 80px; object-fit: contain; }
+  .hero-logo { margin-bottom: 18px; }
+  .hero-logo img { height: 86px; object-fit: contain; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3)); }
   .hero-badge {
-    display: inline-block; background: rgba(220,71,158,0.25);
-    border: 1px solid rgba(220,71,158,0.5); color: #ffb3dd;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
-    padding: 6px 16px; border-radius: 20px; margin-bottom: 14px; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(220,71,158,0.18);
+    border: 1px solid rgba(220,71,158,0.4); color: #ffbddf;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 2.5px;
+    padding: 6px 18px; border-radius: 30px; margin-bottom: 16px;
+    text-transform: uppercase; backdrop-filter: blur(4px);
   }
   .hero-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.2rem, 8vw, 4rem); color: #fff; line-height: 1; margin-bottom: 10px;
+    font-size: clamp(2.4rem, 9vw, 4.4rem);
+    color: #fff; line-height: 1; margin-bottom: 12px;
+    letter-spacing: 0.5px;
   }
   .hero-title span { color: var(--pink); }
-  .hero-desc { color: rgba(255,255,255,0.6); font-size: 0.9rem; max-width: 420px; margin: 0 auto; line-height: 1.6; }
-  .progress-wrap { max-width: 620px; margin: 28px auto 0; padding: 0 20px; }
-  .progress-steps { display: flex; align-items: center; justify-content: center; gap: 0; }
-  .prog-step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative; }
+  .hero-desc {
+    color: rgba(255,255,255,0.55); font-size: 0.88rem;
+    max-width: 400px; margin: 0 auto; line-height: 1.7;
+    font-weight: 400; letter-spacing: 0.2px;
+  }
+  /* franja inferior colores marca */
+  .hero-strip {
+    position: absolute; bottom: 48px; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--pink), var(--blue));
+    opacity: 0.7;
+  }
+
+  /* ── PROGRESS STEPS ── */
+  .progress-wrap { max-width: 620px; margin: 32px auto 0; padding: 0 24px; }
+  .progress-steps { display: flex; align-items: flex-start; justify-content: center; gap: 0; }
+  .prog-step {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 7px; flex: 1; position: relative;
+  }
   .prog-step::after {
-    content: ''; position: absolute; top: 15px; left: 50%; right: -50%;
-    height: 2px; background: var(--border); z-index: 0;
+    content: ''; position: absolute; top: 14px; left: calc(50% + 16px); right: calc(-50% + 16px);
+    height: 2px; background: var(--border); z-index: 0; transition: background 0.4s;
   }
   .prog-step:last-child::after { display: none; }
   .prog-dot {
-    width: 30px; height: 30px; border-radius: 50%;
-    border: 2px solid var(--border); background: #fff;
-    color: var(--muted); font-size: 0.78rem; font-weight: 700;
-    display: flex; align-items: center; justify-content: center; z-index: 1; transition: all 0.3s;
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 2px solid var(--border); background: var(--card);
+    color: var(--muted); font-size: 0.72rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1; transition: all 0.35s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
-  .prog-step.active .prog-dot { border-color: var(--pink); background: var(--pink); color: #fff; }
+  .prog-step.active .prog-dot {
+    border-color: var(--pink); background: var(--pink); color: #fff;
+    box-shadow: 0 0 0 4px rgba(220,71,158,0.15);
+    transform: scale(1.1);
+  }
   .prog-step.done .prog-dot { border-color: var(--blue); background: var(--blue); color: #fff; }
-  .prog-step.active::after, .prog-step.done::after { background: var(--blue); }
-  .prog-label { font-size: 0.65rem; color: var(--muted); text-align: center; font-weight: 500; }
+  .prog-step.active::after, .prog-step.done::after { background: linear-gradient(90deg, var(--blue), #c0cfe8); }
+  .prog-label {
+    font-size: 0.6rem; color: var(--muted); text-align: center;
+    font-weight: 500; letter-spacing: 0.3px; line-height: 1.3;
+  }
   .prog-step.active .prog-label { color: var(--pink); font-weight: 700; }
-  .form-wrap { max-width: 620px; margin: 0 auto; padding: 24px 20px 60px; }
+  .prog-step.done .prog-label { color: var(--blue); }
+
+  /* ── FORM WRAP ── */
+  .form-wrap { max-width: 620px; margin: 0 auto; padding: 28px 20px 70px; }
   .form-page { display: none; }
-  .form-page.active { display: block; }
+  .form-page.active { display: block; animation: slideUp 0.35s cubic-bezier(.4,0,.2,1); }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── FORM SECTION CARD ── */
   .form-section {
-    background: var(--card); border-radius: 20px; padding: 24px;
-    margin-bottom: 14px; border: 1.5px solid var(--border);
-    box-shadow: 0 2px 16px rgba(47,77,138,0.07);
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s;
   }
-  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .form-section:hover { box-shadow: var(--shadow-md); }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
   .section-icon {
-    width: 34px; height: 34px; border-radius: 10px; background: var(--blue);
-    display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+    width: 38px; height: 38px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--blue), #1e3a7a);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.05rem; flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(47,77,138,0.25);
   }
-  .section-title { font-size: 0.95rem; font-weight: 700; color: var(--blue); }
-  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .section-title {
+    font-size: 0.92rem; font-weight: 700; color: var(--text);
+    letter-spacing: -0.1px;
+  }
+
+  /* ── FIELDS ── */
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .field-full { grid-column: 1 / -1; }
-  .field { display: flex; flex-direction: column; gap: 6px; }
-  .field label { font-size: 0.78rem; font-weight: 600; color: var(--text); }
+  .field { display: flex; flex-direction: column; gap: 7px; }
+  .field label {
+    font-size: 0.74rem; font-weight: 600; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.8px;
+  }
   .field label span { color: var(--pink); }
   .field input, .field select, .field textarea {
-    padding: 11px 14px; border-radius: 10px;
-    border: 1.5px solid var(--border); background: #f8faff;
-    font-family: 'Outfit', sans-serif; font-size: 0.88rem; color: var(--text);
-    transition: border-color 0.2s; outline: none;
+    padding: 12px 16px; border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: var(--bg2);
+    font-family: 'Outfit', sans-serif; font-size: 0.9rem;
+    color: var(--text); font-weight: 500;
+    transition: all 0.2s; outline: none;
+    appearance: none; -webkit-appearance: none;
   }
-  .field input:focus, .field select:focus { border-color: var(--blue); background: #fff; }
+  .field input::placeholder { color: #b0bcd8; font-weight: 400; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--pink);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(220,71,158,0.1);
+  }
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7eb8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
 
   /* PLANES - solo 2 */
   .cobertura-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -116,7 +209,7 @@
     font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
     color: var(--blue); line-height: 1; margin-bottom: 2px;
   }
-  .cob-dia-unit { font-size: 0.7rem; color: var(--muted); margin-bottom: 10px; }
+  .cob-dia-unit { font-size: 0.7rem; color: var(--muted); margin-bottom: 6px; }
   .cob-feature { font-size: 0.74rem; color: #444; margin-bottom: 4px; display: flex; gap: 6px; align-items: flex-start; }
   .cob-feature::before { content: '✓'; color: var(--pink); font-weight: 700; flex-shrink: 0; }
   .cob-total {
@@ -124,13 +217,24 @@
     font-size: 0.78rem; color: var(--muted);
   }
   .cob-total strong { color: var(--blue); font-size: 1rem; }
+
+  /* COP por día — mismo peso visual que USD */
   .cob-cop-dia {
-    font-size: 0.62rem; color: var(--muted); margin-top: -8px; margin-bottom: 10px;
-    background: rgba(47,77,138,0.06); border-radius: 6px; padding: 3px 7px;
-    display: inline-block; letter-spacing: 0.3px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem; color: var(--pink);
+    line-height: 1; margin-bottom: 8px;
+    display: none; letter-spacing: 0.5px;
   }
+  .cob-cop-dia-unit {
+    font-size: 0.62rem; color: var(--muted);
+    margin-top: -6px; margin-bottom: 10px;
+    display: block; letter-spacing: 0.3px;
+  }
+
+  /* COP total — más visible */
   .cob-cop-total {
-    font-size: 0.7rem; color: var(--muted); margin-top: 4px; font-style: italic;
+    font-size: 0.82rem; color: var(--pink);
+    font-weight: 700; margin-top: 4px;
   }
   .trm-bar {
     background: linear-gradient(135deg, #f0f4ff, #e8eeff);
@@ -150,10 +254,12 @@
   /* DEPORTE PILLS */
   .deportes-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
   .dep-pill {
-    padding: 7px 14px; border-radius: 20px;
-    border: 1.5px solid var(--border); background: #f8faff;
-    color: var(--muted); font-size: 0.8rem; cursor: pointer;
-    transition: all 0.2s; font-family: 'Outfit', sans-serif;
+    padding: 8px 16px; border-radius: 30px;
+    border: 1.5px solid var(--border); background: var(--bg2);
+    color: var(--muted); font-size: 0.78rem; cursor: pointer;
+    transition: all 0.2s cubic-bezier(.4,0,.2,1);
+    font-family: 'Outfit', sans-serif; font-weight: 500;
+    letter-spacing: 0.2px;
   }
   .dep-pill:hover, .dep-pill.selected {
     border-color: var(--pink); color: var(--pink);
@@ -164,44 +270,68 @@
   .check-wrap label { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
   .check-wrap label a { color: var(--blue); }
 
-  /* BOTONES */
+  /* ── BOTONES ── */
   .btn-next {
-    width: 100%; padding: 15px; border-radius: 14px;
-    background: linear-gradient(135deg, var(--blue), #1a2f6e);
-    color: #fff; font-size: 1rem; font-weight: 700; border: none;
-    cursor: pointer; transition: all 0.2s; font-family: 'Outfit', sans-serif; margin-top: 8px;
+    width: 100%; padding: 15px 24px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--blue-light) 0%, #0f2057 100%);
+    color: #fff; font-size: 0.95rem; font-weight: 700; border: none;
+    cursor: pointer; transition: all 0.25s cubic-bezier(.4,0,.2,1);
+    font-family: 'Outfit', sans-serif; margin-top: 10px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 16px rgba(47,77,138,0.25);
+    position: relative; overflow: hidden;
   }
-  .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(47,77,138,0.3); }
+  .btn-next::after {
+    content: '→';
+    position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+    transition: transform 0.2s;
+  }
+  .btn-next:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(47,77,138,0.35);
+  }
+  .btn-next:hover::after { transform: translateY(-50%) translateX(4px); }
+  .btn-next:active { transform: translateY(0); }
+
   .btn-back {
     width: 100%; padding: 13px; border-radius: 14px;
     background: transparent; color: var(--muted);
-    font-size: 0.9rem; border: 1.5px solid var(--border); cursor: pointer;
+    font-size: 0.88rem; border: 1.5px solid var(--border); cursor: pointer;
     transition: all 0.2s; font-family: 'Outfit', sans-serif; margin-top: 8px;
+    letter-spacing: 0.2px;
   }
-  .btn-back:hover { border-color: var(--blue); color: var(--blue); }
+  .btn-back:hover { border-color: var(--blue); color: var(--blue); background: rgba(47,77,138,0.04); }
+
   .btn-wa {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     width: 100%; padding: 15px; border-radius: 14px;
-    background: #25D366; color: #fff; font-size: 0.95rem; font-weight: 700;
-    border: none; cursor: pointer; transition: all 0.2s; font-family: 'Outfit', sans-serif;
+    background: linear-gradient(135deg, #25D366, #1aab52);
+    color: #fff; font-size: 0.95rem; font-weight: 700;
+    border: none; cursor: pointer; transition: all 0.25s;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.25);
   }
-  .btn-wa:hover { background: #1ebe59; transform: translateY(-2px); }
+  .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+
   .btn-email {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     width: 100%; padding: 15px; border-radius: 14px;
     background: linear-gradient(135deg, var(--pink), #b5337e);
     color: #fff; font-size: 0.95rem; font-weight: 700;
-    border: none; cursor: pointer; transition: all 0.2s; font-family: 'Outfit', sans-serif;
+    border: none; cursor: pointer; transition: all 0.25s;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 4px 16px rgba(220,71,158,0.25);
   }
-  .btn-email:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,71,158,0.3); }
+  .btn-email:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,71,158,0.35); }
+
   .btn-copy {
     display: flex; align-items: center; justify-content: center; gap: 8px;
     width: 100%; padding: 12px; border-radius: 12px;
     background: transparent; color: var(--blue);
-    font-size: 0.85rem; border: 1.5px solid var(--blue); cursor: pointer;
+    font-size: 0.85rem; border: 1.5px solid var(--border); cursor: pointer;
     transition: all 0.2s; font-family: 'Outfit', sans-serif; margin-top: 8px;
   }
-  .btn-copy:hover { background: var(--blue); color: #fff; }
+  .btn-copy:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
   .btn-copy.copied { background: #e8f5e9; border-color: #43a047; color: #2e7d32; }
 
   /* RESUMEN */
@@ -234,15 +364,23 @@
   .share-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
   .toast {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
-    background: #1a2744; color: #fff; padding: 12px 24px; border-radius: 12px;
-    font-size: 0.85rem; font-weight: 600; transition: transform 0.3s ease;
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: linear-gradient(135deg, #1a2744, #0f1f4d);
+    color: #fff; padding: 12px 28px; border-radius: 30px;
+    font-size: 0.82rem; font-weight: 600; transition: transform 0.35s cubic-bezier(.4,0,.2,1);
     z-index: 9999; pointer-events: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    letter-spacing: 0.3px;
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
-  footer { text-align: center; padding: 24px; color: var(--muted); font-size: 0.78rem; border-top: 1px solid var(--border); background: #fff; }
+  footer {
+    text-align: center; padding: 28px 24px; color: var(--muted);
+    font-size: 0.76rem; border-top: 1px solid var(--border);
+    background: var(--card); letter-spacing: 0.2px;
+  }
   footer strong { color: var(--pink); }
+  footer span { opacity: 0.5; margin: 0 6px; }
 
   @media (max-width: 480px) {
     .field-grid { grid-template-columns: 1fr; }
@@ -262,6 +400,7 @@
   <div class="hero-badge">⚡ Protección Deportiva Internacional · AssistCard</div>
   <div class="hero-title">SOLICITUD DE <span>PÓLIZA</span></div>
   <div class="hero-desc">Completa los datos para generar tu cotización de seguro deportivo internacional.</div>
+  <div class="hero-strip"></div>
   <div class="progress-wrap">
     <div class="progress-steps">
       <div class="prog-step active" data-step="1"><div class="prog-dot">1</div><div class="prog-label">Viaje</div></div>
@@ -359,7 +498,7 @@
             <button type="button" class="dep-pill" data-dep="Atletismo">🏃 Atletismo</button>
             <button type="button" class="dep-pill" data-dep="Ciclismo">🚴 Ciclismo</button>
             <button type="button" class="dep-pill" data-dep="Boxeo">🥊 Boxeo</button>
-            <button type="button" class="dep-pill" data-dep="Rugby">🏉 Rugby</button>
+            <button type="button" class="dep-pill" data-dep="Patinaje">⛸️ Patinaje</button>
             <button type="button" class="dep-pill" data-dep="Voleibol">🏐 Voleibol</button>
             <button type="button" class="dep-pill" data-dep="Otro">➕ Otro</button>
           </div>
@@ -392,7 +531,7 @@
           <div class="cob-plan-name">AC35 + ADDON DEPORTES</div>
           <div class="cob-dia-precio">USD 8.5</div>
           <div class="cob-dia-unit">costo por día</div>
-          <div class="cob-cop-dia" id="cop-dia-ac35">≈ COP —</div>
+          <div class="cob-cop-dia" id="cop-dia-ac35" style="display:none;"></div><span class="cob-cop-dia-unit" id="cop-dia-ac35-unit" style="display:none;">por día · COP</span>
           <div class="cob-feature">Hasta USD/EUR 35.000 en cobertura médica</div>
           <div class="cob-feature">Cobertura deportiva incluida</div>
           <div class="cob-feature">Localización y pérdida de equipaje</div>
@@ -406,7 +545,7 @@
           <div class="cob-plan-name">AC60 + ADDON DEPORTES</div>
           <div class="cob-dia-precio">USD 10.16</div>
           <div class="cob-dia-unit">costo por día</div>
-          <div class="cob-cop-dia" id="cop-dia-ac60">≈ COP —</div>
+          <div class="cob-cop-dia" id="cop-dia-ac60" style="display:none;"></div><span class="cob-cop-dia-unit" id="cop-dia-ac60-unit" style="display:none;">por día · COP</span>
           <div class="cob-feature">Hasta USD 50.000 accidentes personales 24 hrs</div>
           <div class="cob-feature">Hasta USD 60.000 cobertura deportiva</div>
           <div class="cob-feature">Equipaje hasta USD 1.200</div>
@@ -430,7 +569,7 @@
           <div class="cob-plan-name">ACR35 + ADDON DEPORTES</div>
           <div class="cob-dia-precio">USD 10.12</div>
           <div class="cob-dia-unit">costo por día · IVA incluido</div>
-          <div class="cob-cop-dia" id="cop-dia-acr35">≈ COP —</div>
+          <div class="cob-cop-dia" id="cop-dia-acr35" style="display:none;"></div><span class="cob-cop-dia-unit" id="cop-dia-acr35-unit" style="display:none;">por día · COP</span>
           <div class="cob-feature">Hasta USD/EUR 35.000 en cobertura médica</div>
           <div class="cob-feature">Cobertura deportiva incluida</div>
           <div class="cob-feature">Localización y pérdida de equipaje</div>
@@ -444,7 +583,7 @@
           <div class="cob-plan-name">ACR60 + ADDON DEPORTES</div>
           <div class="cob-dia-precio">USD 12.09</div>
           <div class="cob-dia-unit">costo por día · IVA incluido</div>
-          <div class="cob-cop-dia" id="cop-dia-acr60">≈ COP —</div>
+          <div class="cob-cop-dia" id="cop-dia-acr60" style="display:none;"></div><span class="cob-cop-dia-unit" id="cop-dia-acr60-unit" style="display:none;">por día · COP</span>
           <div class="cob-feature">Hasta USD 50.000 accidentes personales 24 hrs</div>
           <div class="cob-feature">Hasta USD 60.000 cobertura deportiva</div>
           <div class="cob-feature">Equipaje hasta USD 1.200</div>
@@ -457,8 +596,10 @@
       <!-- PRECIO DESTACADO -->
       <div id="precioDestacado" style="display:none; margin-top:20px; background:linear-gradient(135deg,#2F4D8A,#1a2f6e); border-radius:16px; padding:20px; text-align:center; color:#fff;">
         <div style="font-size:0.72rem; color:rgba(255,255,255,0.5); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">💵 Tu inversión total</div>
-        <div id="precioGrande" style="font-family:&#39;Bebas Neue&#39;,sans-serif; font-size:3.5rem; color:#90FFD9; line-height:1;">USD 0.00</div>
-        <div id="precioDetalle" style="font-size:0.82rem; color:rgba(255,255,255,0.7); margin-top:4px;">— días · USD —/día</div>
+        <div id="precioGrande" style="font-family:'Bebas Neue',sans-serif; font-size:3.5rem; color:#90FFD9; line-height:1;">USD 0.00</div>
+        <div id="precioCOPDestacado" style="display:none; font-family:'Bebas Neue',sans-serif; font-size:2rem; color:#DC479E; line-height:1; margin-top:4px;"></div>
+        <div id="precioCOPLabel" style="display:none; font-size:0.65rem; color:rgba(255,255,255,0.45); letter-spacing:1px; margin-bottom:2px;">pesos colombianos</div>
+        <div id="precioDetalle" style="font-size:0.82rem; color:rgba(255,255,255,0.7); margin-top:6px;">— días · USD —/día</div>
         <div style="margin-top:12px; background:rgba(255,255,255,0.08); border-radius:10px; padding:10px; font-size:0.8rem; color:rgba(255,255,255,0.6);">
           ✅ Precio final confirmado · Sin costos ocultos
         </div>
@@ -690,9 +831,23 @@ function selectPlan(card) {
   const total = (selectedPlan.tarifa * dias).toFixed(2);
   
   document.getElementById('precioGrande').textContent = 'USD ' + total;
-  document.getElementById('precioDetalle').textContent = 
+  document.getElementById('precioDetalle').textContent =
     dias + ' días · USD ' + selectedPlan.tarifa + '/día · ' + selectedPlan.nombre;
-  
+
+  // COP en destacado
+  const trmVal = getTRM();
+  const copDest = document.getElementById('precioCOPDestacado');
+  const copLabel = document.getElementById('precioCOPLabel');
+  if (trmVal > 0 && dias > 0) {
+    const copTotal = Math.round(selectedPlan.tarifa * dias * trmVal);
+    copDest.textContent = '≈ ' + copTotal.toLocaleString('es-CO') + ' COP';
+    copDest.style.display = 'block';
+    copLabel.style.display = 'block';
+  } else {
+    copDest.style.display = 'none';
+    copLabel.style.display = 'none';
+  }
+
   document.getElementById('precioDestacado').style.display = 'block';
   document.getElementById('btnContinuarPlan').style.display = 'block';
   
@@ -742,15 +897,22 @@ function calcularPrecio() {
   const acr = esReceptivoColombia();
 
   function setCOP(idDia, idTot, tarifa) {
-    const elDia = document.getElementById(idDia);
-    const elTot = document.getElementById(idTot);
+    const elDia  = document.getElementById(idDia);
+    const elUnit = document.getElementById(idDia + '-unit');
+    const elTot  = document.getElementById(idTot);
     if (!elDia || !elTot) return;
     if (mostrarCOP) {
-      elDia.style.display = 'inline-block';
-      elDia.textContent = formatCOP(tarifa * trm) + '/día';
-      elTot.textContent = dias > 0 ? formatCOP(tarifa * dias * trm) : '';
+      const copDia = Math.round(tarifa * trm);
+      // Mostrar solo el número formateado en Bebas Neue grande
+      elDia.textContent = copDia.toLocaleString('es-CO');
+      elDia.style.display = 'block';
+      if (elUnit) elUnit.style.display = 'block';
+      elTot.textContent = dias > 0
+        ? '≈ COP ' + Math.round(tarifa * dias * trm).toLocaleString('es-CO') + ' total'
+        : '';
     } else {
       elDia.style.display = 'none';
+      if (elUnit) elUnit.style.display = 'none';
       elTot.textContent = '';
     }
   }
@@ -787,6 +949,19 @@ function calcularPrecio() {
     document.getElementById('precioGrande').textContent = 'USD ' + total;
     document.getElementById('precioDetalle').textContent =
       dias + ' días · USD ' + selectedPlan.tarifa + '/día · ' + selectedPlan.nombre;
+
+    // Refresh COP en destacado
+    const copDest  = document.getElementById('precioCOPDestacado');
+    const copLabel = document.getElementById('precioCOPLabel');
+    if (trm > 0 && dias > 0) {
+      const copTotal = Math.round(selectedPlan.tarifa * dias * trm);
+      copDest.textContent = '≈ ' + copTotal.toLocaleString('es-CO') + ' COP';
+      copDest.style.display = 'block';
+      copLabel.style.display = 'block';
+    } else {
+      copDest.style.display = 'none';
+      copLabel.style.display = 'none';
+    }
   }
 }
 
