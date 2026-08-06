@@ -666,6 +666,24 @@
         </div>
       </div>
     </div>
+
+    <!-- CÓDIGO EMBAJADOR -->
+    <div class="form-section" style="border: 1.5px solid rgba(220,71,158,0.25); background: linear-gradient(135deg, #fff, #fff8fc);">
+      <div class="section-header">
+        <div class="section-icon" style="background: linear-gradient(135deg, var(--pink), #b5337e);">🏅</div>
+        <div>
+          <div class="section-title">Código de Embajador Deportivo</div>
+          <div style="font-size:0.72rem; color:var(--muted); margin-top:2px;">Opcional · Solo si fuiste referido por un Embajador Sekiury Sports</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Código de Embajador</label>
+        <input type="text" id="codigoEmbajador" placeholder="Ej: SKY-NPD-2608" 
+          style="text-transform:uppercase; letter-spacing:1px; font-weight:600;"
+          oninput="this.value = this.value.toUpperCase()">
+      </div>
+    </div>
+
     <button class="btn-next" onclick="goToPage(4)">Continuar →</button>
     <button class="btn-back" onclick="goToPage(2)">← Atrás</button>
   </div>
@@ -738,6 +756,7 @@
       <div class="resumen-row"><span class="resumen-key">🌎 Residencia</span><span class="resumen-val" id="r-pais">—</span></div>
       <div class="resumen-row"><span class="resumen-key">📱 Teléfono</span><span class="resumen-val" id="r-tel">—</span></div>
       <div class="resumen-row"><span class="resumen-key">📧 Email</span><span class="resumen-val" id="r-email">—</span></div>
+      <div class="resumen-row" id="r-embajador-row" style="display:none;"><span class="resumen-key">🏅 Embajador</span><span class="resumen-val" id="r-embajador" style="color:var(--pink); font-weight:700;">—</span></div>
       <div class="resumen-total">
         <div class="resumen-total-label">💵 Total estimado</div>
         <div class="resumen-total-val" id="r-total">USD 0.00</div>
@@ -986,6 +1005,17 @@ function buildSummary() {
   document.getElementById('r-tel').textContent = document.getElementById('telefono').value || '—';
   document.getElementById('r-email').textContent = document.getElementById('email').value || '—';
   document.getElementById('r-total').textContent = 'USD ' + getTotal();
+
+  // Embajador — solo mostrar si hay código
+  const codEmb = document.getElementById('codigoEmbajador').value.trim();
+  const embRow = document.getElementById('r-embajador-row');
+  if (codEmb) {
+    document.getElementById('r-embajador').textContent = codEmb;
+    embRow.style.display = 'flex';
+  } else {
+    embRow.style.display = 'none';
+  }
+
   document.getElementById('sharePreview').textContent = generarMensaje();
 }
 
@@ -1007,6 +1037,7 @@ function generarMensaje() {
   const dir = document.getElementById('direccion').value;
   const emerg = document.getElementById('contactoEmerg').value;
   const emergTel = document.getElementById('contactoEmergTel').value;
+  const codEmb = document.getElementById('codigoEmbajador').value.trim();
   const tipoFact = document.getElementById('tipoFactura').value;
   const nombreFact = document.getElementById('nombreFact').value;
   const nitFact = document.getElementById('nitFact').value;
@@ -1037,7 +1068,7 @@ return `━━━━━━━━━━━━━━━━━━
 📧 Email: ${mail}
 🏠 Dirección: ${dir || 'No indicada'}
 🆘 Contacto emergencia: ${emerg || 'No indicado'} · ${emergTel || 'Sin teléfono'}
-
+${codEmb ? '🏅 Cód. Embajador: ' + codEmb : ''}
 🧾 *DATOS DE FACTURACIÓN*
 🏢 Facturar a: ${tipoFact}
 📛 ${nombreFact}
